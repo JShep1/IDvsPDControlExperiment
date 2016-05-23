@@ -1,0 +1,32 @@
+Gains for timestep 0.001:
+
+shoulder_pan_joint		1000.0	0.0	100.0
+shoulder_lift_joint		10000.0	0.0	100.0
+elbow_joint			1000.0	0.0	100.0
+wrist_1_joint			1000.0	0.0	100.0
+wrist_2_joint			1000.0	0.0	100.0
+wrist_3_joint			1000.0	0.0	100.0
+l_finger_actuator		1000.0	0.0	100.0
+r_finger_actuator		1000.0	0.0	100.0
+
+Gains for timestep 0.01:
+
+shoulder_pan_joint		300.0	0.0	15.0
+shoulder_lift_joint		3000.0	0.0	150.0
+elbow_joint			300.0	0.0	150.0
+wrist_1_joint			300.0	0.0	150.0
+wrist_2_joint			300.0	0.0	150.0
+wrist_3_joint			300.0	0.0	150.0
+l_finger_actuator		300.0	0.0	15.0
+r_finger_actuator		300.0	0.0	15.0
+
+Gains for timestep 0.05:
+
+shoulder_pan_joint		400.0	0.0	4.0
+shoulder_lift_joint		1150.0	0.0	10.0
+elbow_joint			500.0	0.0	20.0
+wrist_1_joint			300.0	0.0	10.0
+wrist_2_joint			300.0	0.0	10.0
+wrist_3_joint			400.0	0.0	10.0
+l_finger_actuator		200.0	0.0	30.0
+r_finger_actuator		10.0	0.0	1.0
