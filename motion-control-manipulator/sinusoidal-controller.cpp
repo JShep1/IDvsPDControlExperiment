@@ -198,8 +198,6 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
         u[joints[i]->get_coord_index()] = tau; 
     }
   }
-
-
   return u; 
 }
 /*

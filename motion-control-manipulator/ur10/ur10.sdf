@@ -89,6 +89,7 @@
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
+   <!--
     <link name='upper_arm_link'>
       <pose>0 0.220941 0.1273 3.14159 1.57079 3.14159</pose>
       <inertial>
@@ -316,6 +317,6 @@
     </joint>
 
     <plugin name='ur10_controller' filename='libur10-controller.so'/>
-
+-->
   </model>
 </sdf>
