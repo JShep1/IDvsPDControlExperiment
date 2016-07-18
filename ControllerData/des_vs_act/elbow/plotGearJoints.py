@@ -62,12 +62,13 @@ plt.plot(t001, y5,'c' ,label='PD-0.001')
 # set limits
 axPlot = plt.subplot(111)
 axPlot.set_xlim(-.001, 5)
-s = 'Actual vs. Desired Joint Angle for Inverse Dynamic and PD Controller';
+s = 'Actual vs. Desired Joint Angle for ID and PD Controller';
 # add titles, labels, and legend
 plt.title(s, fontdict=font)
 plt.xlabel('Time', fontdict=font)
 plt.ylabel('Joint Angle', fontdict=font)
-plt.legend(loc=4, shadow=True)
+#plt.legend(loc=4, shadow=True)
+plt.legend(bbox_to_anchor=(.0, 0.317), loc=2, borderaxespad=0.)
 
 # annotate rise time (interval)
 #plt.axhspan(set_point-error_band_delta,set_point+error_band_delta, facecolor='0.5', alpha=0.25)
