@@ -61,7 +61,7 @@ plt.plot(t001, y5,'c' ,label='PD-0.001')
 
 # set limits
 axPlot = plt.subplot(111)
-axPlot.set_xlim(-.001, 3)
+axPlot.set_xlim(-.001, 5)
 s = 'Actual vs. Desired Joint Angle for Inverse Dynamic and PD Controller';
 # add titles, labels, and legend
 plt.title(s, fontdict=font)
