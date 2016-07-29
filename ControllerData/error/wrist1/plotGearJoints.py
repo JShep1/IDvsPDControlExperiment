@@ -31,6 +31,10 @@ font =  {'family' : 'sans-serif',
          'weight' : 'normal',
          'size'   : 16,
         }
+fig_size=plt.rcParams["figure.figsize"]
+fig_size[0]=12
+fig_size[1]=5
+plt.rcParams["figure.figsize"]=fig_size
 
 # step size (constant value)
 DT05   = 0.05
@@ -49,18 +53,36 @@ t001 = np.linspace(0,y2.size*DT001,y2.size)
 # setup the figure
 fig = plt.figure()
 
+for i in range(0,y5.size):
+	if y5[i] < 0:
+		y5[i] = y5[i] * -1
 #print "%d" % y3.size
-
+for i in range(0,y2.size):
+	y2[i] = y2[i] * y2[i]
+for i in range(0,y3.size):
+	y3[i] = y3[i] * y3[i]
+for i in range(0,y4.size):
+	y4[i] = y4[i] * y4[i]
+for i in range(0,y5.size):
+	y5[i] = y5[i] * y5[i]
 # plot data
-plt.plot(t001,y2,'r' ,label='ID-0.001')
-plt.plot(t01, y3,'g' ,label='ID-0.01')
-plt.plot(t05, y4,'b' ,label='ID-0.05')
-plt.plot(t001, y5,'c' ,label='PID-0.001')
+plt.plot(t001,y2,'r' ,linestyle="--",label='ID-0.001')
+plt.plot(t01, y3,'g' ,linestyle="-.",label='ID-0.01')
+plt.plot(t05, y4,'b' ,marker='^',label='ID-0.05')
+plt.plot(t001, y5,'c' ,label='PD-0.001')
+
+A = np.argmax(y2)
+B = np.argmax(y3)
+C = np.argmax(y4)
+D = np.argmax(y5)
+
+print sys.argv[1]+" Max: ID001=%f; ID01=%f; ID05=%f; PD001=%f" % (y2[A],y3[B],y4[C],y5[D])
 
 # set limits
 axPlot = plt.subplot(111)
-axPlot.set_xlim(-.001, 5)
-s = 'Positional Error for Different Timesteps';
+axPlot.set_xlim(-.001, 3)
+plt.yscale('log')
+s = 'Squared Error on Logarithmic Scale';
 # add titles, labels, and legend
 plt.title(s, fontdict=font)
 plt.xlabel('Time', fontdict=font)

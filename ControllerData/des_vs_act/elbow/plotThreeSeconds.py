@@ -29,8 +29,16 @@ if len(sys.argv) < 2:
 font =  {'family' : 'sans-serif',
          'color'  : 'black',
          'weight' : 'normal',
-         'size'   : 16,
+         'size'   : 12,
         }
+
+fig_size=plt.rcParams["figure.figsize"]
+fig_size[0]=12
+fig_size[1]=3
+plt.rcParams["figure.figsize"]=fig_size
+
+
+
 
 # step size (constant value)
 DT05   = 0.05
@@ -54,10 +62,10 @@ fig = plt.figure()
 
 # plot data
 plt.plot(t001, y1,'k' ,label='Des')
-plt.plot(t001, y2,'r' ,label='ID-0.001')
-plt.plot(t01,  y3,'g' ,label='ID-0.01')
+plt.plot(t001, y2,'r' ,linestyle='--',label='ID-0.001')
+plt.plot(t01,  y3,'g', linestyle='-.',label='ID-0.01')
 plt.plot(t05,  y4,'b' ,label='ID-0.05')
-plt.plot(t001, y5,'c' ,label='PD-0.001')
+plt.plot(t001, y5,'c' ,linestyle='-',label='PD-0.001')
 
 # set limits
 axPlot = plt.subplot(111)
@@ -68,7 +76,7 @@ plt.title(s, fontdict=font)
 plt.xlabel('Time', fontdict=font)
 plt.ylabel('Joint Angle', fontdict=font)
 #plt.legend(loc=4, shadow=True)
-plt.legend(bbox_to_anchor=(.0, 0.317), loc=2, borderaxespad=0.)
+plt.legend(bbox_to_anchor=(.0, 0.417), loc=2, prop={'size':9},borderaxespad=0.)
 
 # annotate rise time (interval)
 #plt.axhspan(set_point-error_band_delta,set_point+error_band_delta, facecolor='0.5', alpha=0.25)
