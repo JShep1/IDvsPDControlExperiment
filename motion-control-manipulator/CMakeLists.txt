@@ -20,5 +20,3 @@ include_directories (${MOBY_INCLUDE_DIR})
 # sphere plugin
 add_library(sinusoidal-controller MODULE sinusoidal-controller.cpp)
 target_link_libraries(sinusoidal-controller ${MOBY_LIBRARIES} ${RAVELIN_LIBRARIES})
-
-

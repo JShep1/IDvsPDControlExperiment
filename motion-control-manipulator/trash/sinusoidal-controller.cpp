@@ -202,28 +202,6 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
 }
 */
 
-void constraint_callback_fn(std::vector<Constraint>& constraints, boost::shared_ptr<void> data)
-{
-  // get the mapping from joint names to gc indices
-  const std::vector<shared_ptr<Jointd> >& joints = robot->get_joints();
-
-  // setup the mapping from joint ids to joints 
-  std::map<std::string, shared_ptr<Jointd> > mapping;
-  for (unsigned i=0; i< joints.size(); i++)
-    mapping[joints[i]->joint_id] = joints[i];
-
-  // setup inverse dynamics constraints
-  for (std::map<std::string, double>::const_iterator i = qd_des.begin(); i != qd_des.end(); i++)
-  {
-    Constraint c;
-    c.constraint_type = Constraint::eInverseDynamics;
-    c.inv_dyn_joint = dynamic_pointer_cast<Joint>(mapping[i->first]);
-    assert(c.inv_dyn_joint->num_dof() == 1);
-    c.qdot_des.resize(1); 
-    c.qdot_des[0] = i->second;
-    constraints.push_back(c);
-  }
-}
 
 VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, void*)
 {
@@ -247,21 +225,21 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
   const double SMALL_AMP = AMP*0.1;
   const double SCALE_ERROR = 10;
   const double SCALE_V_ERROR = 1;
-  q_des["shoulder_pan_joint"] = sin(t*PERIOD)*AMP;
-  q_des["shoulder_lift_joint"] = sin(t*2.0*PERIOD)*SMALL_AMP;
-  q_des["elbow_joint"] = sin(t*2.0/3.0*PERIOD)*AMP;
-  q_des["wrist_1_joint"] = sin(t*1.0/7.0*PERIOD)*AMP;
-  q_des["wrist_2_joint"] = sin(t*2.0/11.0*PERIOD)*AMP;
-  q_des["wrist_3_joint"] = sin(t*3.0/13.0*PERIOD)*AMP;
+  q_des["shoulder_pan_joint"] = std::sin(t*PERIOD)*AMP;
+  q_des["shoulder_lift_joint"] = std::sin(t*2.0*PERIOD)*SMALL_AMP;
+  q_des["elbow_joint"] = std::sin(t*2.0/3.0*PERIOD)*AMP;
+  q_des["wrist_1_joint"] = std::sin(t*1.0/7.0*PERIOD)*AMP;
+  q_des["wrist_2_joint"] = std::sin(t*2.0/11.0*PERIOD)*AMP;
+  q_des["wrist_3_joint"] = std::sin(t*3.0/13.0*PERIOD)*AMP;
   q_des["r_finger_actuator"] = 0.0;
   q_des["l_finger_actuator"] = 0.0;
 
-  qd_des["shoulder_pan_joint"] = cos(t*PERIOD)*AMP*PERIOD;
-  qd_des["shoulder_lift_joint"] = cos(t*2.0*PERIOD)*SMALL_AMP*PERIOD*2.0;
-  qd_des["elbow_joint"] = cos(t*2.0/3.0*PERIOD)*AMP*PERIOD*2.0/3.0;
-  qd_des["wrist_1_joint"] = cos(t*1.0/7.0*PERIOD)*AMP*PERIOD*1.0/7.0;
-  qd_des["wrist_2_joint"] = cos(t*2.0/11.0*PERIOD)*AMP*PERIOD*2.0/11.0;
-  qd_des["wrist_3_joint"] = cos(t*3.0/13.0*PERIOD)*AMP*PERIOD*3.0/13.0;
+  qd_des["shoulder_pan_joint"] = std::cos(t*PERIOD)*AMP*PERIOD;
+  qd_des["shoulder_lift_joint"] = std::cos(t*2.0*PERIOD)*SMALL_AMP*PERIOD*2.0;
+  qd_des["elbow_joint"] = std::cos(t*2.0/3.0*PERIOD)*AMP*PERIOD*2.0/3.0;
+  qd_des["wrist_1_joint"] = std::cos(t*1.0/7.0*PERIOD)*AMP*PERIOD*1.0/7.0;
+  qd_des["wrist_2_joint"] = std::cos(t*2.0/11.0*PERIOD)*AMP*PERIOD*2.0/11.0;
+  qd_des["wrist_3_joint"] = std::cos(t*3.0/13.0*PERIOD)*AMP*PERIOD*3.0/13.0;
   qd_des["l_finger_actuator"] = 0.0;
   qd_des["r_finger_actuator"] = 0.0;
 
@@ -352,9 +330,6 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
   //abrobot->set_generalized_coordinates_euler(q_des);
   //abrobot->set_generalized_velocity(DynamicBodyd::eSpatial, qd_des);
   const vector<shared_ptr<RigidBodyd> >& links = abrobot->get_links();  
-
-// EMD: disabling this
-
   for(unsigned i=0;i<joints.size();i++){
     if(joints[i]->num_dof() != 0){
       
@@ -371,8 +346,8 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
 
       //out1 << q_des[joints[i]->joint_id] << " " << std::endl;
       //out2 << joints[i]->q[0] << " " << std::endl;
-      out1 << 0 << " " << std::endl;
-      out2 << qd_des[joints[i]->joint_id]-joints[i]->qd[0]<< " " << std::endl;
+      out1 << q_des[joints[i]->joint_id] << " " << std::endl;
+      out2 << joints[i]->q[0]<< " " << std::endl;
 
       out1.close();
 
@@ -380,10 +355,14 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
       
     }
   }
-/*
   id.calc_inv_dyn(abrobot, idyn_data, step_size, u);
-*/  
-return u; 
+
+
+  
+  
+
+
+  return u; 
 }
 
 
@@ -420,8 +399,6 @@ void init(void* separator, const std::map<std::string, Moby::BasePtr>& read_map,
       q_init[joints[i]->joint_id] = tempQ[joints[i]->get_coord_index()];
 
 
-  // setup the constraint callback function
-  sim->constraint_callback_fn = &constraint_callback_fn;
   
   const double PERIOD = 5.0;
   const double AMP = 0.5;
@@ -468,8 +445,8 @@ void init(void* separator, const std::map<std::string, Moby::BasePtr>& read_map,
   for (std::map<std::string, double>::const_iterator i = q_init.begin(); i != q_init.end(); i++)
   {
     const std::string& joint_name = i->first;
-    std::string fname1 = joint_name + "_desired05.txt";
-    std::string fname2 = joint_name + "_state05.txt";
+    std::string fname1 = joint_name + "_desiredPID.txt";
+    std::string fname2 = joint_name + "_statePID.txt";
     std::ofstream out1(fname1.c_str());
     std::ofstream out2(fname2.c_str());
     out1.close();

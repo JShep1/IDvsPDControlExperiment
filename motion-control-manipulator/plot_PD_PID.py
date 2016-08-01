@@ -33,23 +33,30 @@ font =  {'family' : 'sans-serif',
         }
 
 # step size (constant value)
-DT = 0.001
+DT = 0.05
 
 # load data
-y1 = pylab.loadtxt(sys.argv[1] + "_desirederrorPID.txt")
-y2 = pylab.loadtxt(sys.argv[1] + "_stateerrorPID.txt")
+y1 = pylab.loadtxt(sys.argv[1] + "_desired05.txt")
+y2 = pylab.loadtxt(sys.argv[1] + "_state05.txt")
 t = np.linspace(0,y1.size*DT,y1.size)
+
+for i in range(0,y1.size):
+	y2[i] = y1[i]-y2[i]
+	y2[i]=y2[i]*y2[i]
+	y1[i]=0
+
+
 
 # setup the figure
 fig = plt.figure()
 
 # plot data
-plt.plot(t,y1,'k' ,label='Desired joint angle')
-plt.plot(t,y2,'r' ,label='Actual joint angle')
+plt.plot(t,y1,'k' ,label='Desired Velocity')
+plt.plot(t,y2,'r' ,label='Actual Velocity')
 
 # set limits
 axPlot = plt.subplot(111)
-axPlot.set_xlim(-.001, 5)
+axPlot.set_xlim(.5, 5)
 
 # add titles, labels, and legend
 plt.title('Desired vs. actual joint angles', fontdict=font)
