@@ -60,7 +60,7 @@ std::map<std::string, double> q_des, qd_des, qdd_des;//O3D value is the PID gain
 Moby::RCArticulatedBodyPtr robot;
 boost::shared_ptr<TimeSteppingSimulator> sim;
 boost::shared_ptr<GravityForce> grav;
-
+/*
 VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, void*)
 {
   // get the robot body and joints
@@ -200,7 +200,9 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
   }
   return u; 
 }
-/*
+*/
+
+
 VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, void*)
 {
   if (dt != -1 && t != 0){
@@ -361,7 +363,7 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
 
 
   return u; 
-}*/
+}
 
 
 
