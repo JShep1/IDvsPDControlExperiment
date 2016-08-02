@@ -60,7 +60,7 @@ std::map<std::string, double> q_des, qd_des, qdd_des;//O3D value is the PID gain
 Moby::RCArticulatedBodyPtr robot;
 boost::shared_ptr<TimeSteppingSimulator> sim;
 boost::shared_ptr<GravityForce> grav;
-/*
+
 VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, void*)
 {
   // get the robot body and joints
@@ -200,8 +200,8 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
   }
   return u; 
 }
-*/
 
+/*
 void constraint_callback_fn(std::vector<Constraint>& constraints, boost::shared_ptr<void> data)
 {
   // get the mapping from joint names to gc indices
@@ -364,15 +364,15 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
       std::map<std::string, double>::const_iterator j = q_init.find(joints[i]->joint_id);
       //assert(j != q_init.end());
       
-      std::string fname1 = joints[i]->joint_id + "_desired05.txt";
-      std::string fname2 = joints[i]->joint_id + "_state05.txt";
+      std::string fname1 = joints[i]->joint_id + "_desired1.txt";
+      std::string fname2 = joints[i]->joint_id + "_state1.txt";
       std::ofstream out1(fname1.c_str(), std::ostream::app);
       std::ofstream out2(fname2.c_str(), std::ostream::app);
 
       //out1 << q_des[joints[i]->joint_id] << " " << std::endl;
       //out2 << joints[i]->q[0] << " " << std::endl;
       out1 << 0 << " " << std::endl;
-      out2 << qd_des[joints[i]->joint_id]-joints[i]->qd[0]<< " " << std::endl;
+      out2 <<qd_des[joints[i]->joint_id]-joints[i]->qd[0]<< " " << std::endl;
 
       out1.close();
 
@@ -380,12 +380,10 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
       
     }
   }
-/*
-  id.calc_inv_dyn(abrobot, idyn_data, step_size, u);
-*/  
+  //id.calc_inv_dyn(abrobot, idyn_data, step_size, u);
 return u; 
 }
-
+*/
 
 
 
@@ -421,7 +419,7 @@ void init(void* separator, const std::map<std::string, Moby::BasePtr>& read_map,
 
 
   // setup the constraint callback function
-  sim->constraint_callback_fn = &constraint_callback_fn;
+  //sim->constraint_callback_fn = &constraint_callback_fn;
   
   const double PERIOD = 5.0;
   const double AMP = 0.5;
@@ -468,8 +466,8 @@ void init(void* separator, const std::map<std::string, Moby::BasePtr>& read_map,
   for (std::map<std::string, double>::const_iterator i = q_init.begin(); i != q_init.end(); i++)
   {
     const std::string& joint_name = i->first;
-    std::string fname1 = joint_name + "_desired05.txt";
-    std::string fname2 = joint_name + "_state05.txt";
+    std::string fname1 = joint_name + "_desiredPID.txt";
+    std::string fname2 = joint_name + "_statePID.txt";
     std::ofstream out1(fname1.c_str());
     std::ofstream out2(fname2.c_str());
     out1.close();

@@ -40,10 +40,10 @@ y1 = pylab.loadtxt(sys.argv[1] + "_desired05.txt")
 y2 = pylab.loadtxt(sys.argv[1] + "_state05.txt")
 t = np.linspace(0,y1.size*DT,y1.size)
 
-for i in range(0,y1.size):
-	y2[i] = y1[i]-y2[i]
-	y2[i]=y2[i]*y2[i]
-	y1[i]=0
+#for i in range(0,y1.size):
+#	y2[i] = y1[i]-y2[i]
+#	y2[i]=y2[i]*y2[i]
+#	y1[i]=0
 
 
 

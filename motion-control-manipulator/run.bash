@@ -1,21 +1,164 @@
 #!/bin/bash
 
-python plot_PD_PID.py elbow_joint
-python plot_PD_PID.py shoulder_pan_joint
-python plot_PD_PID.py shoulder_lift_joint
-python plot_PD_PID.py wrist_1_joint
-python plot_PD_PID.py wrist_2_joint
-python plot_PD_PID.py wrist_3_joint
-python plot_PD_PID.py l_finger_actuator
-python plot_PD_PID.py r_finger_actuator
 
-rm fixed*
-rm world*
+cd 001vdata/error/
 
-rm data/*
-mv *05.txt /data/
-rm *PID.txt 
+mkdir elbow
+mkdir shoulder_lift
+mkdir shoulder_pan
+mkdir wrist_1
+mkdir wrist_2
+mkdir wrist_3
+mkdir l_finger
+mkdir r_finger
 
-rm plots/*
-mv *.png /plots/
+mv elbow* elbow/
+mv shoulder_lift* shoulder_lift
+mv shoulder_pan* shoulder_pan
+mv wrist_1* wrist_1
+mv wrist_2* wrist_2
+mv wrist_3* wrist_3
+mv l_finger* l_finger
+mv r_finger* r_finger
+
+cd ../actvsdes/
+
+mkdir elbow
+mkdir shoulder_lift
+mkdir shoulder_pan
+mkdir wrist_1
+mkdir wrist_2
+mkdir wrist_3
+mkdir l_finger
+mkdir r_finger
+
+mv elbow* elbow/
+mv shoulder_lift* shoulder_lift
+mv shoulder_pan* shoulder_pan
+mv wrist_1* wrist_1
+mv wrist_2* wrist_2
+mv wrist_3* wrist_3
+mv l_finger* l_finger
+mv r_finger* r_finger
+
+cd ../../01vdata/error
+
+mkdir elbow
+mkdir shoulder_lift
+mkdir shoulder_pan
+mkdir wrist_1
+mkdir wrist_2
+mkdir wrist_3
+mkdir l_finger
+mkdir r_finger
+
+mv elbow* elbow/
+mv shoulder_lift* shoulder_lift
+mv shoulder_pan* shoulder_pan
+mv wrist_1* wrist_1
+mv wrist_2* wrist_2
+mv wrist_3* wrist_3
+mv l_finger* l_finger
+mv r_finger* r_finger
+
+cd ../actvsdes
+
+mkdir elbow
+mkdir shoulder_lift
+mkdir shoulder_pan
+mkdir wrist_1
+mkdir wrist_2
+mkdir wrist_3
+mkdir l_finger
+mkdir r_finger
+
+mv elbow* elbow/
+mv shoulder_lift* shoulder_lift
+mv shoulder_pan* shoulder_pan
+mv wrist_1* wrist_1
+mv wrist_2* wrist_2
+mv wrist_3* wrist_3
+mv l_finger* l_finger
+mv r_finger* r_finger
+
+cd ../../05vdata/error/
+
+mkdir elbow
+mkdir shoulder_lift
+mkdir shoulder_pan
+mkdir wrist_1
+mkdir wrist_2
+mkdir wrist_3
+mkdir l_finger
+mkdir r_finger
+
+mv elbow* elbow/
+mv shoulder_lift* shoulder_lift
+mv shoulder_pan* shoulder_pan
+mv wrist_1* wrist_1
+mv wrist_2* wrist_2
+mv wrist_3* wrist_3
+mv l_finger* l_finger
+mv r_finger* r_finger
+
+cd ../actvsdes/
+
+mkdir elbow
+mkdir shoulder_lift
+mkdir shoulder_pan
+mkdir wrist_1
+mkdir wrist_2
+mkdir wrist_3
+mkdir l_finger
+mkdir r_finger
+
+mv elbow* elbow/
+mv shoulder_lift* shoulder_lift
+mv shoulder_pan* shoulder_pan
+mv wrist_1* wrist_1
+mv wrist_2* wrist_2
+mv wrist_3* wrist_3
+mv l_finger* l_finger
+mv r_finger* r_finger
+
+cd ../../1vdata/error/
+
+mkdir elbow
+mkdir shoulder_lift
+mkdir shoulder_pan
+mkdir wrist_1
+mkdir wrist_2
+mkdir wrist_3
+mkdir l_finger
+mkdir r_finger
+
+mv elbow* elbow/
+mv shoulder_lift* shoulder_lift
+mv shoulder_pan* shoulder_pan
+mv wrist_1* wrist_1
+mv wrist_2* wrist_2
+mv wrist_3* wrist_3
+mv l_finger* l_finger
+mv r_finger* r_finger
+
+cd ../actvsdes/
+
+
+mkdir elbow
+mkdir shoulder_lift
+mkdir shoulder_pan
+mkdir wrist_1
+mkdir wrist_2
+mkdir wrist_3
+mkdir l_finger
+mkdir r_finger
+
+mv elbow* elbow/
+mv shoulder_lift* shoulder_lift
+mv shoulder_pan* shoulder_pan
+mv wrist_1* wrist_1
+mv wrist_2* wrist_2
+mv wrist_3* wrist_3
+mv l_finger* l_finger
+mv r_finger* r_finger
 
